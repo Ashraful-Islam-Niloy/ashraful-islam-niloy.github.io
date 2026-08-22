@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ashraful Islam Niloy — Network Security & Penetration Testing Portfolio</title>
+<meta name="description" content="Portfolio of Ashraful Islam Niloy — IT Executive building toward a career in network security and penetration testing. CNSP certified, with hands-on experience in ethical hacking, CTFs, and IT operations.">
+<meta name="theme-color" content="#0a0e16">
+<meta property="og:title" content="Ashraful Islam Niloy — Network Security Portfolio">
+<meta property="og:description" content="IT Executive and aspiring cybersecurity specialist — certifications, projects, and experience in network security and ethical hacking.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230a0e16'/%3E%3Ccircle cx='50' cy='50' r='24' fill='%23ffb454'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ===================== RESET & TOKENS ===================== */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --bg:#0a0e16;
+    --bg-alt:#0d1220;
+    --surface:#121826;
+    --border:#212a3b;
+    --border-hover:#2c374a;
+    --ink:#e8ecf2;
+    --ink-dim:#aab2c0;
+    --muted:#78839a;
+    --accent:#ffb454;
+    --accent-ink:#1a1206;
+    --accent-soft:rgba(255,180,84,.12);
+    --radius:14px;
+    --maxw:1180px;
+    --font-display:'Space Grotesk',sans-serif;
+    --font-body:'IBM Plex Sans',sans-serif;
+    --font-mono:'IBM Plex Mono',monospace;
+  }
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-body);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  h1,h2,h3{font-family:var(--font-display);letter-spacing:-0.01em;}
+  ::selection{background:var(--accent);color:var(--accent-ink);}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px;}
+  section{scroll-margin-top:88px;}
+
+  /* ===================== LAYOUT HELPERS ===================== */
+  .block{width:100%;}
+  .block-alt{background:var(--bg-alt);}
+  .section{max-width:var(--maxw);margin:0 auto;padding:6rem 1.5rem;}
+  .eyebrow{
+    font-family:var(--font-mono);font-size:.78rem;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--accent);margin-bottom:.85rem;display:inline-block;
+  }
+  .section h2{font-size:clamp(1.7rem,1.1rem + 2vw,2.5rem);font-weight:600;margin-bottom:2.5rem;}
+
+  /* ===================== BUTTONS ===================== */
+  .btn{
+    display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.5rem;
+    border-radius:999px;font-family:var(--font-mono);font-size:.85rem;font-weight:500;
+    letter-spacing:.02em;transition:.2s ease;border:1px solid transparent;cursor:pointer;
+  }
+  .btn-primary{background:var(--accent);color:var(--accent-ink);}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 28px -10px rgba(255,180,84,.55);}
+  .btn-outline{border-color:var(--border-hover);color:var(--ink);}
+  .btn-outline:hover{border-color:var(--accent);color:var(--accent);}
+  .btn-ghost{color:var(--ink-dim);font-family:var(--font-mono);font-size:.8rem;padding:.5rem .25rem;}
+  .btn-ghost:hover{color:var(--accent);}
+
+  /* ===================== NAV ===================== */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    border-bottom:1px solid transparent;transition:.3s ease;
+  }
+  .nav.scrolled{background:rgba(10,14,22,.82);backdrop-filter:blur(12px);border-bottom-color:var(--border);}
+  .nav-inner{
+    max-width:var(--maxw);margin:0 auto;padding:1.15rem 1.5rem;
+    display:flex;align-items:center;justify-content:space-between;
+  }
+  .brand{font-family:var(--font-mono);font-weight:500;font-size:1.05rem;letter-spacing:.02em;}
+  .brand-dot{color:var(--accent);}
+  .nav-links{display:flex;gap:1.9rem;font-family:var(--font-mono);font-size:.83rem;}
+  .nav-links a{color:var(--ink-dim);transition:.2s ease;letter-spacing:.02em;}
+  .nav-links a:hover,.nav-links a.active{color:var(--accent);}
+  .nav-actions{display:flex;align-items:center;gap:1.25rem;}
+  .nav-toggle{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px;}
+  .nav-toggle span{width:22px;height:2px;background:var(--ink);transition:.3s ease;}
+  .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-toggle.open span:nth-child(2){opacity:0;}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  @media (max-width:860px){
+    .nav-toggle{display:flex;}
+    .nav-links{
+      position:fixed;inset:64px 0 auto 0;background:var(--bg-alt);
+      flex-direction:column;padding:1.5rem;gap:1.1rem;
+      transform:translateY(-12px);opacity:0;pointer-events:none;
+      transition:.25s ease;border-bottom:1px solid var(--border);font-size:.95rem;
+    }
+    .nav-links.open{transform:translateY(0);opacity:1;pointer-events:auto;}
+  }
+
+  /* ===================== HERO ===================== */
+  .hero{padding:9.5rem 1.5rem 5rem;max-width:var(--maxw);margin:0 auto;}
+  .hero-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;}
+  .hero-role{
+    font-family:var(--font-mono);color:var(--ink-dim);font-size:1rem;margin:1rem 0 1.25rem;
+  }
+  .hero h1{font-size:clamp(2.4rem,1.6rem + 3.2vw,4.2rem);font-weight:600;line-height:1.05;}
+  .hero-pitch{max-width:46ch;color:var(--ink-dim);font-size:1.02rem;margin-bottom:2.25rem;}
+  .hero-stats{display:flex;gap:2.5rem;margin-bottom:2.5rem;}
+  .hero-stats .num{display:block;font-family:var(--font-display);font-size:1.9rem;font-weight:600;color:var(--accent);}
+  .hero-stats .label{font-family:var(--font-mono);font-size:.72rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;}
+  .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.25rem;}
+  .hero-social{display:flex;gap:1.5rem;font-family:var(--font-mono);font-size:.78rem;letter-spacing:.05em;}
+  .hero-social a{color:var(--ink-dim);text-transform:uppercase;transition:.2s ease;}
+  .hero-social a:hover{color:var(--accent);}
+
+  .hero-visual{display:flex;align-items:center;justify-content:center;}
+  .node-graph{width:100%;max-width:440px;height:auto;}
+  .edge{stroke:var(--border-hover);stroke-width:1;opacity:.55;}
+  .edge-flow{stroke:var(--accent);stroke-width:1.5;stroke-dasharray:6 9;opacity:.9;animation:dash 2.4s linear infinite;}
+  @keyframes dash{to{stroke-dashoffset:-90;}}
+  .node{fill:var(--accent);opacity:.4;animation:nodepulse 3.2s ease-in-out infinite;}
+  @keyframes nodepulse{0%,100%{opacity:.35;}50%{opacity:.95;}}
+  .node-hub{fill:var(--accent);opacity:1;animation:hubpulse 2.4s ease-in-out infinite;}
+  @keyframes hubpulse{0%,100%{filter:drop-shadow(0 0 4px var(--accent));}50%{filter:drop-shadow(0 0 13px var(--accent));}}
+
+  @media (max-width:960px){
+    .hero{padding-top:7.5rem;}
+    .hero-inner{grid-template-columns:1fr;text-align:left;}
+    .hero-visual{max-width:300px;margin:1rem auto 0;order:2;}
+    .hero-stats{gap:1.75rem;}
+  }
+
+  /* ===================== ABOUT ===================== */
+  .about-grid{display:grid;grid-template-columns:1fr auto;gap:3.5rem;align-items:center;}
+  .about-text p{color:var(--ink-dim);margin-bottom:1.1rem;max-width:60ch;font-size:1.02rem;}
+  .about-text p:last-child{margin-bottom:0;}
+  .about-photo img,.avatar-fallback{
+    width:200px;height:200px;border-radius:50%;object-fit:cover;
+    border:2px solid var(--border-hover);
+  }
+  .avatar-fallback{
+    display:none;align-items:center;justify-content:center;
+    background:var(--surface);color:var(--accent);
+    font-family:var(--font-display);font-size:2.4rem;font-weight:600;letter-spacing:.05em;
+  }
+  @media (max-width:760px){
+    .about-grid{grid-template-columns:1fr;text-align:left;}
+    .about-photo{order:-1;}
+    .about-photo img,.avatar-fallback{width:140px;height:140px;}
+  }
+
+  /* ===================== TIMELINE / EXPERIENCE ===================== */
+  .timeline{position:relative;padding-left:2.1rem;border-left:1px solid var(--border);display:flex;flex-direction:column;gap:3rem;}
+  .timeline-item{position:relative;}
+  .timeline-marker{
+    position:absolute;left:-2.55rem;top:.35rem;width:11px;height:11px;border-radius:50%;
+    background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft);
+  }
+  .timeline-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem;align-items:baseline;}
+  .timeline-head h3{font-size:1.2rem;font-weight:600;}
+  .timeline-date{font-family:var(--font-mono);font-size:.8rem;color:var(--muted);white-space:nowrap;}
+  .timeline-org{color:var(--accent);font-size:.88rem;margin:.3rem 0 .9rem;font-family:var(--font-mono);}
+  .timeline-content ul{display:flex;flex-direction:column;gap:.5rem;color:var(--ink-dim);font-size:.96rem;max-width:62ch;}
+  .timeline-content li{padding-left:1.1rem;position:relative;}
+  .timeline-content li::before{content:"—";color:var(--muted);position:absolute;left:0;}
+
+  /* ===================== SKILLS ===================== */
+  .skills-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2.5rem;}
+  .skill-group h3{font-size:.95rem;color:var(--ink-dim);font-weight:500;margin-bottom:1rem;font-family:var(--font-body);}
+  .tags{display:flex;flex-wrap:wrap;gap:.6rem;}
+  .tag{
+    font-family:var(--font-mono);font-size:.78rem;padding:.45rem .85rem;
+    border:1px solid var(--border);border-radius:999px;color:var(--ink-dim);
+    transition:.2s ease;
+  }
+  .tag:hover{border-color:var(--accent);color:var(--accent);}
+
+  /* ===================== CARDS (certs / projects) ===================== */
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;align-items:start;}
+  .card{
+    background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+    padding:1.6rem;transition:.25s ease;position:relative;
+  }
+  .card:hover{transform:translateY(-4px);border-color:var(--border-hover);box-shadow:0 18px 34px -22px rgba(0,0,0,.65);}
+  .card h3{font-size:1.02rem;font-weight:600;margin-bottom:.4rem;padding-right:.5rem;}
+  .card .issuer{font-family:var(--font-mono);font-size:.78rem;color:var(--accent);margin-bottom:.65rem;display:block;}
+  .card p{color:var(--ink-dim);font-size:.9rem;}
+  .card .sub{color:var(--muted);font-size:.82rem;margin-top:.5rem;line-height:1.55;}
+  .badge-new{
+    position:absolute;top:-10px;right:1.1rem;background:var(--accent);color:var(--accent-ink);
+    font-family:var(--font-mono);font-size:.65rem;padding:.3rem .65rem;border-radius:999px;
+    font-weight:600;letter-spacing:.03em;
+  }
+  .card-featured{
+    background:linear-gradient(145deg,var(--surface),var(--bg-alt));
+    border-color:var(--border-hover);margin-bottom:1.5rem;padding:2rem;
+  }
+  .card-featured .eyebrow{margin-bottom:.5rem;}
+  .card-featured h3{font-size:1.25rem;margin-bottom:.6rem;}
+  .card-featured p{max-width:70ch;font-size:.96rem;}
+
+  /* ===================== EDUCATION ===================== */
+  .edu-item{margin-bottom:2rem;}
+  .edu-item:last-of-type{margin-bottom:0;}
+  .edu-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem;align-items:baseline;}
+  .edu-head h3{font-size:1.15rem;font-weight:600;}
+  .edu-date{font-family:var(--font-mono);font-size:.8rem;color:var(--muted);}
+  .edu-org{color:var(--accent);font-family:var(--font-mono);font-size:.85rem;margin:.3rem 0 .6rem;}
+  .edu-meta{color:var(--ink-dim);font-size:.92rem;}
+  .lang-row{
+    margin-top:2.5rem;padding-top:1.75rem;border-top:1px solid var(--border);
+    font-family:var(--font-mono);font-size:.85rem;color:var(--muted);
+  }
+  .lang-row span{color:var(--ink-dim);}
+
+  /* ===================== CONTACT ===================== */
+  .contact-text{max-width:56ch;color:var(--ink-dim);margin-bottom:2.5rem;font-size:1.02rem;}
+  .contact-links{display:flex;flex-wrap:wrap;gap:1.25rem;}
+  .contact-links a{
+    font-family:var(--font-mono);font-size:.85rem;letter-spacing:.03em;
+    padding:.9rem 1.4rem;border:1px solid var(--border);border-radius:999px;
+    transition:.2s ease;
+  }
+  .contact-links a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);}
+
+  /* ===================== FOOTER ===================== */
+  footer{border-top:1px solid var(--border);padding:2.5rem 1.5rem;}
+  .footer-inner{
+    max-width:var(--maxw);margin:0 auto;display:flex;flex-wrap:wrap;
+    justify-content:space-between;gap:1rem;align-items:center;
+    font-family:var(--font-mono);font-size:.8rem;color:var(--muted);
+  }
+  .footer-links{display:flex;gap:1.5rem;}
+  .footer-links a{color:var(--muted);transition:.2s ease;}
+  .footer-links a:hover{color:var(--accent);}
+
+  /* ===================== REVEAL ===================== */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.visible{opacity:1;transform:none;}
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1;transform:none;transition:none;}
+    .edge-flow,.node,.node-hub{animation:none !important;}
+    .card:hover,.btn-primary:hover,.contact-links a:hover{transform:none;}
+  }
+
+  @media (max-width:600px){
+    .section{padding:4.5rem 1.25rem;}
+    .hero-stats{flex-wrap:wrap;row-gap:1.25rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand">AIN<span class="brand-dot">.</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="btn-ghost" href="assets/resume.pdf" target="_blank" rel="noopener">Resume ↗</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="top">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <p class="eyebrow">Network Security · Penetration Testing</p>
+        <h1>Ashraful Islam Niloy</h1>
+        <p class="hero-role">IT Executive — building toward network security &amp; pentesting</p>
+        <p class="hero-pitch">I keep organizational systems running day-to-day, and spend the rest of my time learning how to break into them properly — CTFs, bug hunting, and a growing stack of security certifications, CNSP most recently.</p>
+        <div class="hero-stats">
+          <div><span class="num">13</span><span class="label">Certifications</span></div>
+          <div><span class="num">3</span><span class="label">Roles in IT &amp; Security</span></div>
+          <div><span class="num">4</span><span class="label">Personal Projects</span></div>
+        </div>
+        <div class="hero-actions">
+          <a href="#certifications" class="btn btn-primary">View Certifications</a>
+          <a href="#contact" class="btn btn-outline">Get in Touch</a>
+        </div>
+        <div class="hero-social">
+          <a href="https://github.com/Ashraful-Islam-Niloy" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/ashraful-islam-niloy/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="mailto:ashrafulislamniloy18@gmail.com">Email</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <svg class="node-graph" viewBox="0 0 450 450" aria-hidden="true">
+          <line class="edge" x1="70" y1="90" x2="210" y2="55"/>
+          <line class="edge" x1="210" y1="55" x2="350" y2="100"/>
+          <line class="edge" x1="350" y1="100" x2="415" y2="225"/>
+          <line class="edge" x1="415" y1="225" x2="365" y2="350"/>
+          <line class="edge" x1="365" y1="350" x2="215" y2="405"/>
+          <line class="edge" x1="215" y1="405" x2="90" y2="355"/>
+          <line class="edge" x1="90" y1="355" x2="35" y2="215"/>
+          <line class="edge" x1="35" y1="215" x2="70" y2="90"/>
+          <line class="edge edge-flow" x1="225" y1="225" x2="210" y2="55" style="animation-delay:0s"/>
+          <line class="edge" x1="225" y1="225" x2="350" y2="100"/>
+          <line class="edge edge-flow" x1="225" y1="225" x2="415" y2="225" style="animation-delay:.8s"/>
+          <line class="edge" x1="225" y1="225" x2="365" y2="350"/>
+          <line class="edge edge-flow" x1="225" y1="225" x2="215" y2="405" style="animation-delay:1.6s"/>
+          <line class="edge" x1="225" y1="225" x2="90" y2="355"/>
+          <line class="edge" x1="225" y1="225" x2="35" y2="215"/>
+          <circle class="node" cx="70" cy="90" r="4" style="animation-delay:.2s"/>
+          <circle class="node" cx="210" cy="55" r="4" style="animation-delay:1s"/>
+          <circle class="node" cx="350" cy="100" r="4" style="animation-delay:1.8s"/>
+          <circle class="node" cx="415" cy="225" r="4" style="animation-delay:.6s"/>
+          <circle class="node" cx="365" cy="350" r="4" style="animation-delay:1.4s"/>
+          <circle class="node" cx="215" cy="405" r="4" style="animation-delay:2.2s"/>
+          <circle class="node" cx="90" cy="355" r="4" style="animation-delay:.4s"/>
+          <circle class="node" cx="35" cy="215" r="4" style="animation-delay:1.6s"/>
+          <circle class="node node-hub" cx="225" cy="225" r="7"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ABOUT ===================== -->
+  <div class="block block-alt">
+    <section class="section reveal" id="about">
+      <p class="eyebrow">About</p>
+      <h2>A bit about my path</h2>
+      <div class="about-grid">
+        <div class="about-text">
+          <p>I started in IT support — troubleshooting networks and helping people get unstuck. Somewhere in the middle of that I got curious about how systems break, which led me into a penetration testing internship, CTFs, and a growing stack of security certifications.</p>
+          <p>I currently run day-to-day IT operations at Sunrise Education Consultants, while building toward full-time work in network security and penetration testing. Outside of work, that curiosity mostly shows up as CTF challenges and bug hunting — plus earlier stretches maintaining and securing systems as a volunteer for AIUB's Computer Club.</p>
+        </div>
+        <div class="about-photo">
+          <img src="assets/profile.png" alt="Portrait of Ashraful Islam Niloy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="avatar-fallback">AIN</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===================== EXPERIENCE ===================== -->
+  <section class="section reveal" id="experience">
+    <p class="eyebrow">Experience</p>
+    <h2>Where I've worked</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <div class="timeline-head">
+            <h3>IT Executive</h3>
+            <span class="timeline-date">Sep 2024 — Present</span>
+          </div>
+          <p class="timeline-org">Sunrise Education Consultants · Dhaka, Bangladesh</p>
+          <ul>
+            <li>Manage daily IT operations and resolve technical issues across the organization</li>
+            <li>Maintain systems and networks with a focus on data security</li>
+            <li>Support staff with hardware and software needs</li>
+            <li>Keep IT infrastructure performance running smoothly org-wide</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <div class="timeline-head">
+            <h3>Jr. Penetration Tester (Intern)</h3>
+            <span class="timeline-date">Jul — Aug 2024</span>
+          </div>
+          <p class="timeline-org">Byte Capsule · Dhaka, Bangladesh</p>
+          <ul>
+            <li>Conducted penetration tests across systems, networks, and applications to identify vulnerabilities</li>
+            <li>Delivered security assessment reports with remediation recommendations</li>
+            <li>Took part in CTF competitions to stay sharp on current threats and techniques</li>
+            <li>Applied SQL injection, cryptography, and bug-hunting skills to strengthen security posture</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker"></div>
+        <div class="timeline-content">
+          <div class="timeline-head">
+            <h3>Technical Support Engineer (Intern)</h3>
+            <span class="timeline-date">Feb — Apr 2024</span>
+          </div>
+          <p class="timeline-org">GAO Tek Inc. · Remote, United States</p>
+          <ul>
+            <li>Provided technical support and troubleshooting for software and network issues</li>
+            <li>Documented and tracked issues through to timely resolution</li>
+            <li>Collaborated with teams to improve support processes</li>
+            <li>Wrote user guides and technical documentation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SKILLS ===================== -->
+  <div class="block block-alt">
+    <section class="section reveal" id="skills">
+      <p class="eyebrow">Skills</p>
+      <h2>What I work with</h2>
+      <div class="skills-groups">
+        <div class="skill-group">
+          <h3>Security &amp; Pentesting</h3>
+          <div class="tags">
+            <span class="tag">Ethical Hacking</span>
+            <span class="tag">Penetration Testing</span>
+            <span class="tag">SQL Injection</span>
+            <span class="tag">Cybersecurity</span>
+            <span class="tag">CTF Competitions</span>
+            <span class="tag">Bug Hunting</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Systems &amp; Programming</h3>
+          <div class="tags">
+            <span class="tag">Linux</span>
+            <span class="tag">Python</span>
+            <span class="tag">SQL</span>
+            <span class="tag">IoT</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <h3>Productivity Tools</h3>
+          <div class="tags">
+            <span class="tag">Microsoft Word</span>
+            <span class="tag">Microsoft Excel</span>
+            <span class="tag">Microsoft PowerPoint</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===================== CERTIFICATIONS ===================== -->
+  <section class="section reveal" id="certifications">
+    <p class="eyebrow">Certifications</p>
+    <h2>Certifications</h2>
+    <div class="grid">
+      <div class="card">
+        <span class="badge-new">Recently earned</span>
+        <h3>CNSP</h3>
+        <span class="issuer">The SecOps Group</span>
+        <p>Certified Network Security Practitioner — entry-level certification covering network security fundamentals, protocol analysis, and infrastructure hardening.</p>
+      </div>
+      <div class="card">
+        <h3>EHP</h3>
+        <span class="issuer">Byte Capsule</span>
+        <p>Ethical Hacking for Professionals.</p>
+      </div>
+      <div class="card">
+        <h3>EHE</h3>
+        <span class="issuer">EC-Council</span>
+        <p>Ethical Hacking Essentials.</p>
+      </div>
+      <div class="card">
+        <h3>SQL Injection Attacks</h3>
+        <span class="issuer">EC-Council</span>
+        <p>Focused study on identifying and mitigating SQL injection vulnerabilities.</p>
+      </div>
+      <div class="card">
+        <h3>CCNAv7 Certification Track</h3>
+        <span class="issuer">Cisco Networking Academy</span>
+        <p class="sub">Introduction to Networks · Switching, Routing &amp; Wireless Essentials · Enterprise Networking, Security &amp; Automation</p>
+      </div>
+      <div class="card">
+        <h3>PCAP</h3>
+        <span class="issuer">Cisco Networking Academy</span>
+        <p>Programming Essentials in Python.</p>
+      </div>
+      <div class="card">
+        <h3>IT Essentials</h3>
+        <span class="issuer">Cisco Networking Academy</span>
+        <p>Core hardware, software, and troubleshooting fundamentals.</p>
+      </div>
+      <div class="card">
+        <h3>Introduction to IoT</h3>
+        <span class="issuer">Cisco Networking Academy</span>
+        <p>Foundations of connected device architectures.</p>
+      </div>
+      <div class="card">
+        <h3>Introduction to Cybersecurity</h3>
+        <span class="issuer">Cisco Networking Academy</span>
+        <p>Core cybersecurity concepts and threat landscape.</p>
+      </div>
+      <div class="card">
+        <h3>NDG Linux Essentials</h3>
+        <span class="issuer">Cisco Networking Academy</span>
+        <p>Linux fundamentals and command-line operations.</p>
+      </div>
+      <div class="card">
+        <h3>ITE Computer Fundamentals</h3>
+        <p>Foundational computer hardware and systems concepts.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROJECTS ===================== -->
+  <div class="block block-alt">
+    <section class="section reveal" id="projects">
+      <p class="eyebrow">Projects &amp; Research</p>
+      <h2>Things I've built</h2>
+
+      <div class="card card-featured">
+        <span class="eyebrow" style="margin-bottom:.25rem;">Thesis · Feb – May 2023</span>
+        <h3>Different CNN-Based Approach to Skin Lesions Classification</h3>
+        <p>A deep learning framework for classifying skin lesions from dermatoscopic images, aimed at supporting earlier detection of skin cancer. Using the HAM10000 dataset — 10,000+ images across seven lesion categories — I benchmarked five CNN architectures (VGG16, VGG19, ResNet50, DenseNet121, and Inception V3) on precision, recall, and accuracy. DenseNet121 came out on top, reaching 84.1% classification accuracy.</p>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Automatic Bus Ticketing System Using RFID</h3>
+          <span class="issuer">2022</span>
+          <p>RFID-based fare collection and ticketing system for public bus transit.</p>
+        </div>
+        <div class="card">
+          <h3>Food Court Management System</h3>
+          <span class="issuer">2021</span>
+          <p>Management system for handling food court orders, vendors, and transactions.</p>
+        </div>
+        <div class="card">
+          <h3>Water Level Indicator</h3>
+          <span class="issuer">2020</span>
+          <p>Embedded systems project for monitoring and alerting on water tank levels.</p>
+        </div>
+        <div class="card">
+          <h3>Computer Graphics Project Using OpenGL C++</h3>
+          <span class="issuer">2019</span>
+          <p>Graphics programming project exploring rendering fundamentals with OpenGL and C++.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ===================== EDUCATION ===================== -->
+  <section class="section reveal" id="education">
+    <p class="eyebrow">Education</p>
+    <h2>Education</h2>
+
+    <div class="edu-item">
+      <div class="edu-head">
+        <h3>BSc in Computer Science &amp; Engineering</h3>
+        <span class="edu-date">Aug 2018 — Sep 2024</span>
+      </div>
+      <p class="edu-org">American International University-Bangladesh · CGPA 3.31/4.00</p>
+      <p class="edu-meta">Relevant coursework: Cybersecurity, Cryptography &amp; Network Security, Computer Networks, Artificial Intelligence, Machine Learning, Operating Systems — plus core CS fundamentals.</p>
+    </div>
+
+    <div class="edu-item">
+      <div class="edu-head">
+        <h3>Higher Secondary Certificate (Science)</h3>
+        <span class="edu-date">2015 — 2017</span>
+      </div>
+      <p class="edu-org">Ideal College · GPA 4.25/5.00</p>
+    </div>
+
+    <div class="lang-row">
+      Languages — <span>Bengali (native)</span> · <span>English (B2, independent user)</span>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <div class="block block-alt">
+    <section class="section reveal" id="contact">
+      <p class="eyebrow">Contact</p>
+      <h2>Get in touch</h2>
+      <p class="contact-text">Open to opportunities in network security and penetration testing — or just want to talk CTFs and infrastructure. My inbox is the fastest way to reach me.</p>
+      <div class="contact-links">
+        <a href="mailto:ashrafulislamniloy18@gmail.com">Email →</a>
+        <a href="https://www.linkedin.com/in/ashraful-islam-niloy/" target="_blank" rel="noopener">LinkedIn →</a>
+        <a href="https://github.com/Ashraful-Islam-Niloy" target="_blank" rel="noopener">GitHub →</a>
+      </div>
+    </section>
+  </div>
+
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="footer-inner">
+    <span>© <span id="year"></span> Ashraful Islam Niloy</span>
+    <div class="footer-links">
+      <a href="https://github.com/Ashraful-Islam-Niloy" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/ashraful-islam-niloy/" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:ashrafulislamniloy18@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Sticky nav background on scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  }, { passive: true });
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', String(open));
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  // Scroll-reveal sections
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('main section[id]');
+  const navAnchors = document.querySelectorAll('.nav-links a');
+  const activeObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => activeObs.observe(s));
+</script>
+</body>
+</html>
